@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       store,
+      pages: null
     }
   },
   components: {
@@ -17,17 +18,19 @@ export default {
     AppMain,
   },
   methods: {
-    getAxios() {
+    getAxios(page) {
       this.store.urlApp = "https://rickandmortyapi.com/api/character"
       const parameters = {
-        ...this.store.inputKey && { name: this.store.inputKey }
+        ...this.store.inputKey && { name: this.store.inputKey },
+        page
       }
 
       axios.get(this.store.urlApp, {
         params: parameters
       }).then((resp) => {
         this.store.characters = resp.data.results;
-
+        this.pages = resp.data.info.pages;
+        console.log(this.pages);
       })
     }
   },
@@ -40,7 +43,7 @@ export default {
 <template>
   <AppHeader />
   <AppSearch @clickBtn="getAxios" />
-  <AppMain />
+  <AppMain @nextPage="getAxios" @prevPage="getAxios" :pages="pages"/>
 </template>
 
 <style lang="scss">

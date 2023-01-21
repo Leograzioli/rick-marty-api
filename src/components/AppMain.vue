@@ -8,11 +8,15 @@ export default {
     data() {
         return {
             store,
+            current: 1
         }
+    },
+    props: {
+        pages: Number
     },
     components: {
         AppCard
-    }
+    }, 
 }
 </script>
 
@@ -23,6 +27,10 @@ export default {
                 <div v-for="(item, index) in store.characters" :key="index" class="col">
                     <AppCard :item="item" />
                 </div>
+            </div>
+            <div class="my-4 d-flex justify-content-center">
+                <a class="btn btn-primary me-4" :class="current === 1 ? 'disabled' : ''" @click.prevent="$emit('prevPage', current = current - 1)">Prev</a>
+                <a class="btn btn-primary" :class="current === pages ? 'disabled' : ''" @click.prevent="$emit('nextPage', current = current + 1)">next</a>              
             </div>
         </div>
     </main>
