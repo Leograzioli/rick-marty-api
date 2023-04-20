@@ -14,7 +14,7 @@ export default {
     <div class="text-center mb-5">
         <input type="text" @keyup.enter="$emit('clickBtn')" placeholder="Search Character Name"
             class="text-primary fw-bold" v-model="store.inputKey">
-        <button @click="$emit('clickBtn')" class="btn btn-primary ms-2">Send!</button>
+        <button @click="$emit('clickBtn')" class="btn btn-primary ms-2">Search!</button>
     </div>
 </template>
 
